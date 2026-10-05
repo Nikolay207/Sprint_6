@@ -17,6 +17,5 @@ class OrderPageLocators:
     DAY_RENTAL = By.XPATH, '//div[text()="четверо суток"]'
     COLOR = By.ID, '{}'
     COMMENT = By.XPATH, '//input[@class = "Input_Input__1iN_Z Input_Responsible__1jDKN"]'
-    CANSEL_ORDER = By.XPATH, '//button[@class = "Button_Button__ra12g Button_Middle__1CSJM Button_Inverted__3IF-i"]'
+    CANSEL_ORDER = By.XPATH, '//button[text()="Отменить заказ"]'
     STATUS_BUTTON = By.XPATH, '//button[text()="Посмотреть статус"]'
-    ORDER_SUCCESS = By.XPATH, '//div[@class = "Order_ModalHeader__3FDaJ"]'

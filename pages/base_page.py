@@ -1,7 +1,9 @@
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from selenium.common.exceptions import TimeoutException
 class BasePage:
+
 
     def __init__(self,driver):
         self.driver=driver
@@ -48,3 +50,10 @@ class BasePage:
     def scroll_to_element(self, locator):
         element = self.driver.find_element (*locator)
         self.driver.execute_script("arguments[0].scrollIntoView({block: 'end'});", element)
+
+    @allure.step('Проверяем, что элемент отображается на странице')
+    def check_element_is_displayed(self, locator):
+        try:
+            return self.find_element_with_wait(locator).is_displayed()
+        except TimeoutException:
+            return False

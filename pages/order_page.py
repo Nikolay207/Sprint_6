@@ -1,5 +1,4 @@
 import allure
-import time
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 from locators.order_page_locators import OrderPageLocators
@@ -12,28 +11,8 @@ class OrderPage(BasePage):
 
     @allure.step('Нажимаем кнопку Посмотреть статус')
     def click_to_status(self):
-        time.sleep(1) #куратор сказал что с time.sleep задание не примут, но без него заказ не успевает распарсится и падает в 8/10 запусков, привязываение к появлению номера заказа не помогло, тест по прежнему падает в  80%, только с time 0.5 или 1 сек всё стабильно работает
         self.click_to_element(OrderPageLocators.STATUS_BUTTON)
 
-    @allure.step('Проверяем что открылась форма заполнения персональных данных для заказа')
-    def check_order_header(self):
-        header = self.find_element_with_wait(OrderPageLocators.ORDER_HEADER)
-        return header.text
-
-    @allure.step('Проверяем что открылась форма заполнения данных для аренды')
-    def check_rent_header(self):
-        header = self.find_element_with_wait(OrderPageLocators.RENT_HEADER)
-        return header.text
-
-    @allure.step('Проверяем что открылся экран со статусом оформленного заказа')
-    def check_cancel_button(self):
-        header = self.find_element_with_wait(OrderPageLocators.CANSEL_ORDER)
-        return header.text
-
-    @allure.step('Проверяем что открылся поп-ап Заказ оформлен')
-    def check_order_success(self):
-        header = self.find_element_with_wait(OrderPageLocators.ORDER_SUCCESS)
-        return header.text
 
     @allure.step('Вводим персональные данные для заказа')
     def fill_form(self, data):
@@ -76,3 +55,6 @@ class OrderPage(BasePage):
     def fill_comment(self,comment):
         self.add_text_to_element(OrderPageLocators.COMMENT,comment)
 
+    @allure.step('Проверяем наличие кнопки отмены заказа на оформленном заказе')
+    def check_cancel_button(self):
+        return self.check_element_is_displayed(OrderPageLocators.CANSEL_ORDER)
